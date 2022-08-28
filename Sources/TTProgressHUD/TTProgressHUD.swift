@@ -94,22 +94,52 @@ private struct ImageView: View {
 private struct LabelView: View {
     var title: String?
     var caption: String?
+    var labelStyle: LabelStyleType?
+    
+    var titleFont: Font?
+    var titleLineLimit: Int?
+    var titleForegroundColor: Color?
+    
+    var captionFont: Font?
+    var captionLineLimit: Int?
+    var captionForegroundColor: Color?
     
     var body: some View {
         VStack(spacing: 4) {
             if let title = title {
-                Text(title)
-                    .font(.system(size: 21.0, weight: .semibold))
-                    .lineLimit(1)
-                    .fixedSize(horizontal: true, vertical: false)
-                    .foregroundColor(.primary)
+                if let labelStyle = labelStyle {
+                    if labelStyle == .system {
+                        Text(title)
+                            .font(.system(size: 21.0, weight: .semibold))
+                            .lineLimit(1)
+                            .fixedSize(horizontal: true, vertical: false)
+                            .foregroundColor(.primary)
+                    } else {
+                        Text(title)
+                            .font(titleFont ?? .system(size: 21.0, weight: .semibold))
+                            .lineLimit(titleLineLimit ?? 1)
+                            .fixedSize(horizontal: true, vertical: false)
+                            .foregroundColor(titleForegroundColor ?? .primary)
+                    }
+                }
             }
+            
             if let caption = caption {
-                Text(caption)
-                    .font(.headline)
-                    .lineLimit(2)
-                    .fixedSize(horizontal: true, vertical: false)
-                    .foregroundColor(.secondary)
+                if let labelStyle = labelStyle {
+                    if labelStyle == .system {
+                        Text(caption)
+                            .font(.headline)
+                            .lineLimit(2)
+                            .fixedSize(horizontal: true, vertical: false)
+                            .foregroundColor(.secondary)
+                    } else {
+                        Text(caption)
+                            .font(captionFont ?? .headline)
+                            .lineLimit(captionLineLimit ?? 2)
+                            .fixedSize(horizontal: true, vertical: false)
+                            .foregroundColor(captionForegroundColor ?? .secondary)
+                    }
+                }
             }
         }
         .multilineTextAlignment(.center)
@@ -178,7 +208,16 @@ public struct TTProgressHUD: View {
                                     errorImage: config.errorImage
                                 )
                             }
-                            LabelView(title: config.title, caption: config.caption)
+                            LabelView(
+                                title: config.title, caption: config.caption,
+                                labelStyle: config.labelStyle,
+                                titleFont: config.titleFont,
+                                titleLineLimit: config.titleLineLimit,
+                                titleForegroundColor: config.titleForegroundColor,
+                                captionFont: config.captionFont,
+                                captionLineLimit: config.captionLineLimit,
+                                captionForegroundColor: config.captionForegroundColor
+                            )
                         }.padding()
                     }
                     .cornerRadius(config.cornerRadius)
