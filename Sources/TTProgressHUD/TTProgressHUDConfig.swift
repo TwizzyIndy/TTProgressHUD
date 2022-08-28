@@ -9,9 +9,17 @@ import SwiftUI
 
 public struct TTProgressHUDConfig: Hashable {
     var type = TTProgressHUDType.loading
+    
     var title: String?
+    var titleFont: Font?
+    var titleLineLimit: Int?
+    
+    var labelStyle: LabelStyleType?
+    
     var caption: String?
-
+    var captionFont: Font?
+    var captionLineLimit: Int?
+    
     var blurEffectStyle: UIBlurEffect.Style?
     
     var minSize: CGSize
@@ -52,6 +60,11 @@ public struct TTProgressHUDConfig: Hashable {
         type: TTProgressHUDType         = .loading,
         title: String?                  = nil,
         caption: String?                = nil,
+        labelStyle: LabelStyleType?     = .system,
+        titleFont: Font?                = nil,
+        titleLineLimit: Int?            = nil,
+        captionFont: Font?              = nil,
+        captionLineLimit: Int?          = nil,
         blurEffectStyle: UIBlurEffect.Style? = .systemChromeMaterial,
         minSize: CGSize                 = CGSize(width: 100.0, height: 100.0),
         cornerRadius: CGFloat           = 12.0,
@@ -77,8 +90,15 @@ public struct TTProgressHUDConfig: Hashable {
         self.type = type
 
         self.title = title
+        self.titleFont = titleFont
+        self.titleLineLimit = titleLineLimit
+        
+        self.labelStyle = labelStyle
+        
         self.caption = caption
-
+        self.captionFont = captionFont
+        self.captionLineLimit = captionLineLimit
+        
         self.blurEffectStyle = blurEffectStyle
         
         self.minSize = minSize
