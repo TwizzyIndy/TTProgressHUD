@@ -15,6 +15,11 @@ public enum TTProgressHUDType {
     case error
 }
 
+public enum LabelStyleType {
+    case system
+    case custom
+}
+
 private struct IndefiniteAnimatedView: View {
     var animatedViewSize: CGSize
     var animatedViewForegroundColor: Color
