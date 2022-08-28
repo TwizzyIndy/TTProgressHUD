@@ -20,6 +20,12 @@ public enum LabelStyleType {
     case custom
 }
 
+private struct CustomTextStyle {
+    var font: Font?
+    var lineLimit: Int?
+    var foregroundColor: Color?
+}
+
 private struct IndefiniteAnimatedView: View {
     var animatedViewSize: CGSize
     var animatedViewForegroundColor: Color
